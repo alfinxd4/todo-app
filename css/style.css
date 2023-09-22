@@ -1,0 +1,31 @@
+.icon-notif {
+    color: #ffc107;
+    cursor: pointer;
+}
+.book-incompleted {
+    background-color: #0D6DFD;
+}
+.book-completed {
+    background-color: #198754;
+    
+}
+.icon-check {
+    color: #ffc107;
+    cursor: pointer;
+}
+
+.icon-trash {
+    color: #dee2e6;
+    cursor: pointer;
+}
+.btn-add{
+    position: relative;
+    bottom: 25px;
+    background-color: #ffc107;
+}
+.btn-add:hover {
+    background-color: #ffc107; ;
+}
+.icon-add {
+    color: #0D6DFD;
+}
