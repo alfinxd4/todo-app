@@ -55,7 +55,7 @@ const addTask= () => {
     // get task object
     const taskObject = generateTaskObject(generateId,titleTask,dateTask,false);
     // push new data to list task
-    todo.push(taskObject);
+    todo.unshift(taskObject);
     // save data from local storage
     saveData();
     document.dispatchEvent(new Event(RENDER_EVENT));
@@ -156,13 +156,61 @@ const findTaskIndex = (taskId) => {
   }
   return -1;
 }
+
+const searhTask = document.getElementById('search-task');
+searhTask.addEventListener('keydown',function () { 
+  const input = document.getElementById("search-task");
+  const filter = input.value.toUpperCase();
+
+  const table = document.getElementById("todo");
+  const tr = table.getElementsByClassName('todo');
+
+  for (let i = 0; i < tr.length; i++) {
+      const td = tr[i].getElementsByTagName("h4")[0];
+      if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+          } else {
+              tr[i].style.display = "none";
+          }
+      }
+  }
+
+  // 
+  const table1 = document.getElementById("todoCompleted");
+  const tr1 = table1.getElementsByClassName('todo-completed');
+
+  for (let i = 0; i < tr1.length; i++) {
+      const td1 = tr1[i].getElementsByTagName("h4")[0];
+      if (td1) {
+          txtValue1 = td1.textContent || td1.innerText;
+          if (txtValue1.toUpperCase().indexOf(filter) > -1) {
+              tr1[i].style.display = "";
+          } else {
+              tr1[i].style.display = "none";
+          }
+      }
+  }
+ })
+
 // add task from task list to completed list
 const addTaskFromCompleted = (taskId) => {
   const taskTarget = findTask(taskId);
   if(taskTarget === null) return;
+  
   taskTarget.isCompleted = true;
   saveData();
   document.dispatchEvent(new Event(RENDER_EVENT))
+}
+// 
+const undoTaskFromCompleted = (taskId) => {
+  const taskTarget = findTask(taskId);
+  if (taskTarget == null) return;
+  
+  taskTarget.isCompleted = false;
+  saveData();
+  document.dispatchEvent(new Event(RENDER_EVENT));
 }
 // remove task from list task {in completed}
 const removeTaskFromList = (taskId) => {
@@ -172,14 +220,7 @@ const removeTaskFromList = (taskId) => {
     saveData();
     document.dispatchEvent(new Event(RENDER_EVENT));
   }
-// 
-const undoTaskFromCompleted = (taskId) => {
-  const taskTarget = findTask(taskId);
-  if (taskTarget == null) return;
-  taskTarget.isCompleted = false;
-  saveData();
-  document.dispatchEvent(new Event(RENDER_EVENT));
-}
+
 // 
 // load data from local storage
 const loadDataFromStorage = () => {
@@ -228,8 +269,6 @@ document.addEventListener('DOMContentLoaded',function () {
         // cancel refresh web
         ev.preventDefault();
         // automatic click close button modal
-        // const closeModal = document.getElementById('closeAddModal');
-        // closeModal.click();
         location.reload();
         // get method add task
         addTask();
