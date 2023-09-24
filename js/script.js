@@ -1,11 +1,11 @@
-// container list books
-const books = [];
+// container list todo
+const todo = [];
 // define custom event RENDER EVENT
-const RENDER_EVENT = 'render-book';
+const RENDER_EVENT = 'render-task';
 // define custom event SAVED EVENT
-const SAVED_EVENT = 'saved-book';
+const SAVED_EVENT = 'saved-task';
 // define STORAGE KEY 
-const STORAGE_KEY = 'BOOK_APPS';
+const STORAGE_KEY = 'TODO_APPS';
 // 
 // check web storage
 const isStorageExist = () => {
@@ -19,18 +19,17 @@ const isStorageExist = () => {
     }
   };
 //   
-// create unique id for book
+// create unique id
 const createId = () => {
     // get timestamp
     return +new Date();
 };
-// define book object data
-const generateBookObject = (id,title,author,year,isCompleted) => {
+// define task object data
+const generateTaskObject = (id,title,date,isCompleted) => {
     return {
         id,
         title,
-        author,
-        year,
+        date,
         isCompleted
       }
 };
@@ -39,154 +38,145 @@ const saveData = () => {
     // check web storage
     if (isStorageExist()) {
      // changed data from obj.js to JSON String
-    const parsed = JSON.stringify(books);
+    const parsed = JSON.stringify(todo);
     // set local storage to save data
     localStorage.setItem(STORAGE_KEY, parsed);
     // create custom event
     document.dispatchEvent(new Event(SAVED_EVENT));
     }
   };
-//  add data book
-const addBook = () => {
+//  add data task
+const addTask= () => {
     // get data from input value
-    const titleBook = document.getElementById('title').value;
-    const authorBook =  document.getElementById('author').value;
-    const yearBook =  document.getElementById('year').value;
+    const titleTask = document.getElementById('title').value;
+    const dateTask =  document.getElementById('date').value;
     // get unique id    
     const generateId = createId();
-    // get book object
-    const bookObject = generateBookObject(generateId,titleBook,authorBook,yearBook,false);
-    // push new data to list book
-    books.push(bookObject);
+    // get task object
+    const taskObject = generateTaskObject(generateId,titleTask,dateTask,false);
+    // push new data to list task
+    todo.push(taskObject);
     // save data from local storage
     saveData();
     document.dispatchEvent(new Event(RENDER_EVENT));
 };
-// create list book {UI}
-const makeBook = (bookObject) => {
-
-    // create title book
-    const titleBook = document.createElement('h4');
-    titleBook.classList.add('title-book', 'text-light', 'mb-0');
-    // define element by book object
-    titleBook.innerText = bookObject.title;
-    // create author book
-    const authorBook = document.createElement('p');
-    authorBook.classList.add('desc-task', 'text-light', 'mb-0');
-    authorBook.innerText = bookObject.author;
-    // create year book
-    const yearBook = document.createElement('p');
-    yearBook.classList.add('desc-task', 'text-light', 'fst-italic', 'mb-0');
-    yearBook.innerText = bookObject.year;
-    // create book container
-    const bookContainer = document.createElement('div');
-    bookContainer.classList.add('col-10', 'col-lg-11');
+// create list task
+const makeTask= (taskObject) => {
+    // create title task
+    const titleTask = document.createElement('h4');
+    titleTask.classList.add('title-task', 'text-light', 'mb-0');
+    // define element by task object
+    titleTask.innerText = taskObject.title;
+    // create date task
+    const dateTask = document.createElement('p');
+    dateTask.classList.add('desc-task', 'text-light','fst-italic', 'mb-0');
+    dateTask.innerText = taskObject.date;
+    // create task container
+    const taskContainer = document.createElement('div');
+    taskContainer.classList.add('col-10', 'col-lg-11');
     // add element
-    bookContainer.appendChild(titleBook);
-    bookContainer.appendChild(authorBook);
-    bookContainer.appendChild(yearBook);
-    // create book container
+    taskContainer.appendChild(titleTask);
+    taskContainer.appendChild(dateTask);
+    // create task container
     const iconContainer = document.createElement('div');
     iconContainer.classList.add('col-2', 'col-lg-1');
     // create container
     const container = document.createElement('div');
-    container.classList.add('row', 'book-incompleted' ,'my-4' ,'py-3' ,'rounded-3');
+    container.classList.add('row', 'todo' ,'my-4' ,'py-3' ,'rounded-3');
     // add element
-    container.append(bookContainer);
+    container.append(taskContainer);
     container.append(iconContainer);
-    // set id book
-    container.setAttribute('id', `book-${bookObject.id}`);
-        // create icon check
-        const checkButton = document.createElement('iconify-icon');
-        checkButton.classList.add('icon-check');
-        checkButton.setAttribute('icon', 'ic:outline-circle');
-        checkButton.setAttribute('width', 30);
-        // create icon trash
-        const trashButton = document.createElement('iconify-icon');
-        trashButton.classList.add('icon-trash');
-        trashButton.setAttribute('icon', 'mdi:trash');
-        trashButton.setAttribute('width', 30);
-        trashButton.setAttribute('data-bs-toggle', "modal");
-        trashButton.setAttribute('data-bs-target', "#deleteModal");
-        // create icon column check 
-        const columnCheck = document.createElement('div');
-        columnCheck.classList.add('text-end');
-        columnCheck.append(checkButton);
-        // create icon column check 
-        const columnTrash = document.createElement('div');
-        columnTrash.classList.add('text-end');
-        columnTrash.append(trashButton);
-        // add element  
-        iconContainer.appendChild(columnCheck);
-        iconContainer.appendChild(columnTrash);
-    //  check book status completed
-    if (bookObject.isCompleted) {
-      container.classList.remove('book-incompleted');
-      container.classList.add('book-completed', 'opacity-75');
-      titleBook.classList.add('text-decoration-line-through');
-      authorBook.classList.add('text-decoration-line-through');
-      yearBook.classList.add('text-decoration-line-through');
+    // set id task
+    container.setAttribute('id', `task-${taskObject.id}`);
+    // create icon check
+    const checkButton = document.createElement('iconify-icon');
+    checkButton.classList.add('icon-check');
+    checkButton.setAttribute('icon', 'ic:outline-circle');
+    checkButton.setAttribute('width', 30);
+    // create icon trash
+    const trashButton = document.createElement('iconify-icon');
+    trashButton.classList.add('icon-trash');
+    trashButton.setAttribute('icon', 'mdi:trash');
+    trashButton.setAttribute('width', 30);
+    // create icon column check 
+    const columnCheck = document.createElement('div');
+    columnCheck.classList.add('text-end');
+    columnCheck.append(checkButton);
+    // create icon column check 
+    const columnTrash = document.createElement('div');
+    columnTrash.classList.add('text-end');
+    columnTrash.append(trashButton);
+    // add element  
+    iconContainer.appendChild(columnCheck);
+    iconContainer.appendChild(columnTrash);
+    //  check task has been completed
+    if (taskObject.isCompleted) {
+      container.classList.remove('todo');
+      container.classList.add('todo-completed', 'opacity-75');
+      titleTask.classList.add('text-decoration-line-through');
+      dateTask.classList.add('text-decoration-line-through');
       checkButton.removeAttribute('icon', 'ic:outline-circle');
       checkButton.setAttribute('icon', 'gg:check-o');
+      // event listener
       checkButton.addEventListener('click',function () {
-        undoBookFromCompleted(bookObject.id);
+        undoTaskFromCompleted(taskObject.id);
     });
       trashButton.addEventListener('click',function () {
-        removeBookFromList(bookObject.id);
+        removeTaskFromList(taskObject.id);
     });
     }
-    //  check book status notcompleted
+    //  check task status notcompleted
     else {
     // event listener
     checkButton.addEventListener('click',function () {
-      addBookFromCompleted(bookObject.id);
+      addTaskFromCompleted(taskObject.id);
   });
     trashButton.addEventListener('click',function () {
-        removeBookFromList(bookObject.id);
+        removeTaskFromList(taskObject.id);
     });
 }
     // load all element above 
     return container;
 }
-// find list of book
-const findBook = (bookId) => {
-    for (const bookItem of books) {
-        if (bookItem.id === bookId) {
-          return bookItem;
+// find list of task
+const findTask = (taskId) => {
+    for (const taskItem of todo) {
+        if (taskItem.id === taskId) {
+          return taskItem;
         }
       }
       return null;
 }
-// find index book from list books
-const findBookIndex = (bookId) => {
-  for (const index in books) {
-    if (books[index].id === bookId) {
+// find index task from list todo
+const findTaskIndex = (taskId) => {
+  for (const index in todo) {
+    if (todo[index].id === taskId) {
       return index;
     }
   }
   return -1;
 }
-// add book from book list to completed list
-const addBookFromCompleted = (bookId) => {
-  const bookTarget = findBook(bookId);
-  if(bookTarget === null) return;
-  bookTarget.isCompleted = true;
+// add task from task list to completed list
+const addTaskFromCompleted = (taskId) => {
+  const taskTarget = findTask(taskId);
+  if(taskTarget === null) return;
+  taskTarget.isCompleted = true;
   saveData();
   document.dispatchEvent(new Event(RENDER_EVENT))
 }
-// remove book from list book {in completed}
-const removeBookFromList = (bookId) => {
-    const bookTarget = findBookIndex(bookId);
-    if (bookTarget === -1) return;
-    books.splice(bookTarget, 1);
+// remove task from list task {in completed}
+const removeTaskFromList = (taskId) => {
+    const taskTarget = findTaskIndex(taskId);
+    if (taskTarget === -1) return;
+    todo.splice(taskTarget, 1);
     saveData();
     document.dispatchEvent(new Event(RENDER_EVENT));
   }
 // 
-const undoBookFromCompleted = (bookId) => {
-  const bookTarget = findBook(bookId);
-  if (bookTarget == null) return;
-  bookTarget.isCompleted = false;
+const undoTaskFromCompleted = (taskId) => {
+  const taskTarget = findTask(taskId);
+  if (taskTarget == null) return;
+  taskTarget.isCompleted = false;
   saveData();
   document.dispatchEvent(new Event(RENDER_EVENT));
 }
@@ -199,28 +189,28 @@ const loadDataFromStorage = () => {
     let data = JSON.parse(serializedData);
     // check data avaiable
     if (data !== null) {
-      for (const book of data) {
-        books.push(book);
+      for (const task of data) {
+        todo.push(task);
       }
     }
     document.dispatchEvent(new Event(RENDER_EVENT));
 }
 // render element
 document.addEventListener(RENDER_EVENT,function () {
-    console.log(books);
+    console.log(todo);
     // 
-    const uncompletedBookList = document.getElementById('books');
-    uncompletedBookList.innerHTML = '';
+    const uncompletedTaskList = document.getElementById('todo');
+    uncompletedTaskList.innerHTML = '';
     // 
-    const completedBookList = document.getElementById('read-book');
-    completedBookList.innerHTML = '';
+    const completedTaskList = document.getElementById('todoCompleted');
+    completedTaskList.innerHTML = '';
     //   
-    for (const bookItem of books) {
-        const bookElement = makeBook(bookItem);
-        if (!bookItem.isCompleted) {
-          uncompletedBookList.append(bookElement);
+    for (const taskItem of todo) {
+        const taskElement = makeTask(taskItem);
+        if (!taskItem.isCompleted) {
+          uncompletedTaskList.append(taskElement);
         }else{
-            completedBookList.append(bookElement);
+          completedTaskList.append(taskElement);
         }
       }
 });
@@ -232,13 +222,19 @@ document.addEventListener(SAVED_EVENT, function () {
 document.addEventListener('DOMContentLoaded',function () {
     // get element form
     const submitForm = document.getElementById('form');
+
     // event add 
     submitForm.addEventListener('submit',function (ev) {
         // cancel refresh web
-        // ev.preventDefault();
-        // get method add book
-        addBook();
+        ev.preventDefault();
+        // automatic click close button modal
+        // const closeModal = document.getElementById('closeAddModal');
+        // closeModal.click();
+        location.reload();
+        // get method add task
+        addTask();
     });
+    
     // check web storage
     if (isStorageExist()) {
     loadDataFromStorage();

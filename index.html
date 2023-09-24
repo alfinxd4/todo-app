@@ -19,36 +19,31 @@
     <nav class="navbar py-3 mb-5">
         <!-- navbar content -->
         <div class="row container-fluid ">
-            <div class="col-11 text-center px-0 ">
+            <div class="col-12 text-center px-0 ">
                 <a class="navbar-brand mx-auto">
                     <!-- logo app -->
                     <img src="image/logo-todo.png" alt="" class="img-fluid" width="150px">
                 </a>
             </div>
-
-            <div class="col-1 px-0 text-end">
-                <span class="">
-                    <!-- icon notif -->
-                    <iconify-icon icon="ion:notifcations" class="icon-notif" width="30" height="25"></iconify-icon>
-                </span>
-            </div>
+            <!-- icon addition -->
+            <!-- <div class="col-1 px-0 text-end"> -->
+            <!-- <span class=""> -->
+            <!-- icon notif -->
+            <!-- <iconify-icon icon="ion:notifcations" class="icon-notif" width="30" height="25"></iconify-icon> -->
+            <!-- </span> -->
+            <!-- </div> -->
         </div>
     </nav>
     <!-- main content -->
     <main>
         <section class="container-fluid">
-            <!-- list waiting book -->
-            <h3>Buku Belum Dibaca : </h3>
-            <div class="" id="books"></div>
+            <!-- to do -->
+            <div class="" id="todo"></div>
             <!-- divider -->
             <hr>
-            <!-- list read book -->
-            <h3>Buku Sudah Dibaca :</h3>
-            <div class="" id="read-book"></div>
-            </div>
-
+            <!-- to do completed -->
+            <div class="" id="todoCompleted"></div>
         </section>
-
         <div class="fixed-bottom text-center">
             <!-- button add -->
             <button type="button" class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addModal">
@@ -56,34 +51,29 @@
                 <iconify-icon icon="icomoon-free:plus" class="icon-add" width="40"></iconify-icon>
             </button>
         </div>
-
     </main>
     <!-- Add Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content ">
-                <form class="form" action="#" id="form" method="post">
+                <!-- form input -->
+                <form class="form" id="form">
                     <div class="modal-header bg-primary">
-                        <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Add New Book</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Add New task</h1>
+                        <button type="button" class="btn-close" id="closeAddModal" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body ">
-                        <!-- form input book -->
                         <div class="input-group mb-3">
-                            <!-- input title book -->
-                            <input type="text" id="title" class="form-control" placeholder="Judul Buku..."
+                            <!-- input title task -->
+                            <input type="text" id="title" class="form-control" placeholder="Masukkan Judul Tugas..."
                                 autocomplete="off" required>
                         </div>
                         <div class="input-group mb-3">
-                            <!-- input author book -->
-                            <input type="text" id="author" class="form-control" placeholder="Nama Penulis Buku..."
-                                autocomplete="off" required>
+                            <!-- input date task -->
+                            <input type="date" id="date" class="form-control" required>
                         </div>
-                        <div class="input-group mb-3">
-                            <!-- input year book -->
-                            <input type="number" id="year" class="form-control" placeholder="Tahun Terbit Buku..."
-                                autocomplete="off" required>
-                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <input type="submit" value="Submit" name="Submit"

@@ -2,10 +2,10 @@
     color: #ffc107;
     cursor: pointer;
 }
-.book-incompleted {
+.todo {
     background-color: #0D6DFD;
 }
-.book-completed {
+.todo-completed {
     background-color: #198754;
     
 }
