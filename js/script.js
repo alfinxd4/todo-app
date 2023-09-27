@@ -69,7 +69,7 @@ const makeTask= (taskObject) => {
     titleTask.innerText = taskObject.title;
     // create date task
     const dateTask = document.createElement('p');
-    dateTask.classList.add('desc-task', 'text-light','fst-italic', 'mb-0');
+    dateTask.classList.add('desc-task', 'text-light', 'mb-0');
     dateTask.innerText = taskObject.date;
     // create task container
     const taskContainer = document.createElement('div');
@@ -82,7 +82,7 @@ const makeTask= (taskObject) => {
     iconContainer.classList.add('col-2', 'col-lg-1');
     // create container
     const container = document.createElement('div');
-    container.classList.add('row', 'todo' ,'my-4' ,'py-3' ,'rounded-3');
+    container.classList.add('row', 'todo-list' ,'my-4' ,'py-3' ,'rounded-3');
     // add element
     container.append(taskContainer);
     container.append(iconContainer);
@@ -98,6 +98,9 @@ const makeTask= (taskObject) => {
     trashButton.classList.add('icon-trash');
     trashButton.setAttribute('icon', 'mdi:trash');
     trashButton.setAttribute('width', 30);
+    trashButton.setAttribute('data-bs-toggle', 'modal');
+    trashButton.setAttribute('data-bs-target', '#deleteModal');
+ 
     // create icon column check 
     const columnCheck = document.createElement('div');
     columnCheck.classList.add('text-end');
@@ -111,19 +114,31 @@ const makeTask= (taskObject) => {
     iconContainer.appendChild(columnTrash);
     //  check task has been completed
     if (taskObject.isCompleted) {
-      container.classList.remove('todo');
-      container.classList.add('todo-completed', 'opacity-75');
-      titleTask.classList.add('text-decoration-line-through');
-      dateTask.classList.add('text-decoration-line-through');
+
+      container.setAttribute('style','background-color:#198754')
+      container.classList.add('opacity-75');
+      titleTask.classList.add('text-decoration-line-through', 'fst-italic');
+      dateTask.classList.add('text-decoration-line-through', 'fst-italic');
       checkButton.removeAttribute('icon', 'ic:outline-circle');
       checkButton.setAttribute('icon', 'gg:check-o');
       // event listener
       checkButton.addEventListener('click',function () {
         undoTaskFromCompleted(taskObject.id);
     });
-      trashButton.addEventListener('click',function () {
-        removeTaskFromList(taskObject.id);
-    });
+
+
+    trashButton.addEventListener('click',function () {
+
+
+      const confirmDelete =  document.getElementById('confirmDelete');
+      confirmDelete.addEventListener('click',function ( ) { 
+    
+          removeTaskFromList(taskObject.id);
+      
+        })
+        });
+
+
     }
     //  check task status notcompleted
     else {
@@ -131,9 +146,24 @@ const makeTask= (taskObject) => {
     checkButton.addEventListener('click',function () {
       addTaskFromCompleted(taskObject.id);
   });
-    trashButton.addEventListener('click',function () {
+
+   trashButton.addEventListener('click',function () {
+
+
+    const confirmDelete =  document.getElementById('confirmDelete');
+    confirmDelete.addEventListener('click',function ( ) { 
+  
         removeTaskFromList(taskObject.id);
-    });
+    
+      })
+      });
+
+
+    
+
+
+ 
+
 }
     // load all element above 
     return container;
@@ -157,43 +187,61 @@ const findTaskIndex = (taskId) => {
   return -1;
 }
 
-const searhTask = document.getElementById('search-task');
-searhTask.addEventListener('keydown',function () { 
-  const input = document.getElementById("search-task");
-  const filter = input.value.toUpperCase();
 
-  const table = document.getElementById("todo");
-  const tr = table.getElementsByClassName('todo');
+// search task by filter data
+$(".bi").click(function () {
+  $(".bi").toggleClass("bi-search bi-arrow-left");
+  $("#toggler").toggle();
+  $("#logo").toggle();
+  $("#field-search").toggle();
+});
 
-  for (let i = 0; i < tr.length; i++) {
-      const td = tr[i].getElementsByTagName("h4")[0];
-      if (td) {
-          txtValue = td.textContent || td.innerText;
+const searchTask = document.getElementById('field-search');
+searchTask.addEventListener('keyup',function () { 
+const inputSearch = document.getElementById("field-search");
+const filter = inputSearch.value.toUpperCase();
+
+  const data = document.getElementById("task"); //task
+  const dataList = data.getElementsByClassName('todo-list');  //
+
+  for (let i = 0; i < dataList.length; i++) {
+      const task = dataList[i].getElementsByClassName("title-task")[0];
+      if (task) {
+          txtValue = task.textContent || task.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
+            dataList[i].style.display = "";
           } else {
-              tr[i].style.display = "none";
+            dataList[i].style.display = "none";
           }
       }
   }
 
-  // 
-  const table1 = document.getElementById("todoCompleted");
-  const tr1 = table1.getElementsByClassName('todo-completed');
+  
+ });
 
-  for (let i = 0; i < tr1.length; i++) {
-      const td1 = tr1[i].getElementsByTagName("h4")[0];
-      if (td1) {
-          txtValue1 = td1.textContent || td1.innerText;
-          if (txtValue1.toUpperCase().indexOf(filter) > -1) {
-              tr1[i].style.display = "";
-          } else {
-              tr1[i].style.display = "none";
-          }
-      }
-  }
- })
+ const searchIcon = document.getElementById('search-icon');
+searchIcon.classList.contains('bi-arrow-left');
 
+ if (searchIcon) {
+  searchIcon.addEventListener('click',function (ev) { 
+   const data = searchTask.value = "";
+   
+  
+    });
+    
+ }
+
+//  const btnSearch = document.getElementById('search');
+
+//  btnSearch.addEventListener('click',function () { 
+
+//   const x = document.getElementById("myDIV");
+//   if (x.style.display === "none") {
+//     x.style.display = "block";
+//   } else {
+//     x.style.display = "none";
+//   }
+//  })
 // add task from task list to completed list
 const addTaskFromCompleted = (taskId) => {
   const taskTarget = findTask(taskId);
@@ -217,7 +265,10 @@ const removeTaskFromList = (taskId) => {
     const taskTarget = findTaskIndex(taskId);
     if (taskTarget === -1) return;
     todo.splice(taskTarget, 1);
+    location.reload();
     saveData();
+      // automatic click close button modal
+
     document.dispatchEvent(new Event(RENDER_EVENT));
   }
 

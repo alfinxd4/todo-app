@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Todo App</title>
+  <!-- bootstrap.css -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <style>
+    body {
+      background-color: #f5f5f5;
+      margin: 0 1em;
+    }
+
+    #field-search {
+      outline: none;
+      width: calc(99% - 16px);
+      position: absolute;
+      display: none;
+
+      padding: 10px 60px;
+      right: 16px;
+
+
+      background: none;
+      border: 1px solid rgba(0, 0, 0, .3);
+    }
+
+    #search-icon {
+      position: relative;
+      cursor: pointer;
+
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar ">
+    <div class="container-fluid">
+     
+      <a class="navbar-brand mx-auto" id="logo">
+        <!-- logo app -->
+        <img src="image/todo-logo.png" alt="" class="img-fluid" width="50px">
+      </a>
+      <div class="">
+        <input type="text" id="field-search" class=" border-top-0 border-start-0 border-end-0"
+          placeholder="Telusuri...">
+        <i class="bi bi-search" id="search-icon" style="font-size: 1.5rem" ;></i>
+      </div>
+    </div>
+  </nav>
+
+
+  <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+  </script>
+
+  <script>
+    $(".bi").click(function () {
+      $(".bi").toggleClass("bi-search bi-arrow-left");
+      $("#toggler").toggle();
+      $("#logo").toggle();
+      $("#field-search").toggle();
+    });
+  </script>
+
+</body>
+
+</html>

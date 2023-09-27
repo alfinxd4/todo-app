@@ -2,13 +2,20 @@
     color: #ffc107;
     cursor: pointer;
 }
-.todo {
+.todo-list {
     background-color: #0D6DFD;
 }
-.todo-completed {
-    background-color: #198754;
-    
-}
+
+#myDIV {
+    position: absolute;
+    width: 200px;
+    top : 75px;
+    right: 30px;
+    background-color: #ffc107;
+    padding: 5px;
+    cursor: pointer;
+ }
+ 
 .icon-check {
     color: #ffc107;
     cursor: pointer;
@@ -29,3 +36,27 @@
 .icon-add {
     color: #0D6DFD;
 }
+body {
+    background-color: #f5f5f5;
+    margin: 0 1em;
+  }
+
+  #field-search {
+    outline: none;
+    width: calc(99% - 16px);
+    position: absolute;
+    display: none;
+
+    padding: 10px 60px;
+    right: 16px;
+
+
+    background: none;
+    border: 1px solid rgba(0, 0, 0, .3);
+  }
+
+  #search-icon {
+    position: relative;
+    cursor: pointer;
+
+  }

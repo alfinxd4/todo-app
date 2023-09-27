@@ -12,30 +12,26 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- iconify -->
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <!--  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!--  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
-<body class="bg-body-secondary mx-4">
+<body class="">
     <!-- navbar-->
-    <nav class="navbar py-3 mb-5">
-        <!-- navbar content -->
-        <div class="row container-fluid ">
-            <div class="col-7 text-center px-0 ">
-                <a class="navbar-brand mx-auto">
-                    <!-- logo app -->
-                    <img src="image/logo-todo.png" alt="" class="img-fluid" width="150px">
-                </a>
+    <nav class="navbar ">
+        <div class="container-fluid">
+
+            <a class="navbar-brand mx-auto" id="logo">
+                <!-- logo app -->
+                <img src="image/todo-logo.png" alt="" class="img-fluid" width="50px">
+            </a>
+            <div class="">
+                <input type="text" id="field-search" class=" border-top-0 border-start-0 border-end-0"
+                    placeholder="Telusuri...">
+                <i class="bi bi-search" id="search-icon" style="font-size: 1.5rem" ;></i>
             </div>
-            <!-- icon addition -->
-            <div class="col-5 px-0 text-end">
-                <!-- <span class=""> -->
-                <!-- icon notif -->
-                <!-- <iconify-icon icon="ion:notifcations" class="icon-notif" width="30" height="25"></iconify-icon> -->
-                <!-- </span> -->
-                <input class="form-control me-2" id="search-task">
-
-            </div>
-
-
         </div>
     </nav>
     <!-- main content -->
@@ -87,13 +83,42 @@
             </div>
         </div>
     </div>
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <!-- form input -->
+
+                <div class="modal-header bg-primary">
+                    <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Add New task</h1>
+                    <button type="button" class="btn-close" id="closeAddModal" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" id="confirmDelete" value="Submit" name="Submit"
+                        class="btn btn-primary text-light fw-bold w-100">
+                </div>
+
+            </div>
+        </div>
+    </div>
     <!-- script.js-->
-    <script src=" js/script.js"> </script>
+    <script src="js/script.js"> </script>
     <!-- bootstrap.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
 
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+
+    <script>
+     
+    </script>
 </body>
 
 </html>
