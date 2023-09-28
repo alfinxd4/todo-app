@@ -10,11 +10,9 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- style.css -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- iconify -->
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <!--  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <!--  -->
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/c8105c8ce4.js" crossorigin="anonymous"></script>
+    <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
@@ -22,33 +20,44 @@
     <!-- navbar-->
     <nav class="navbar ">
         <div class="container-fluid">
-
             <a class="navbar-brand mx-auto" id="logo">
                 <!-- logo app -->
-                <img src="image/todo-logo.png" alt="" class="img-fluid" width="50px">
+                <img src="image/todo-logo.png" alt="" class="img-fluid" width="60">
             </a>
             <div class="">
-                <input type="text" id="field-search" class=" border-top-0 border-start-0 border-end-0"
+                <input type="text" id="search-field" class=" border-top-0 border-start-0 border-end-0 py-3"
                     placeholder="Telusuri...">
-                <i class="bi bi-search" id="search-icon" style="font-size: 1.5rem" ;></i>
+                <i id="search-icon" class="fa-solid fa-magnifying-glass py-3"
+                    style="font-size: 1.5em; color: #6D6D6D;"></i>
             </div>
         </div>
     </nav>
     <!-- main content -->
-    <main>
+    <main class="my-4">
         <section class="container-fluid" id="task">
             <!-- to do -->
-            <div class="" id="todo"></div>
-            <!-- divider -->
-            <hr>
+            <div class="mb-5">
+                <span class="stats-todo">Dikerjakan</span>
+                <i class="fa-solid fa-caret-down mx-2"></i>
+                <div class="" id="todo">
+                </div>
+            </div>
+
+
             <!-- to do completed -->
-            <div class="" id="todoCompleted"></div>
+            <div class="mb-5">
+                <span class="stats-todo">Sudah Dikerjakan</span>
+                <i class="fa-solid fa-caret-down mx-2"></i>
+                <div class="" id="todoCompleted">
+                </div>
+            </div>
+
         </section>
-        <div class="fixed-bottom text-center">
+        <div class="fixed-bottom text-end">
             <!-- button add -->
-            <button type="button" class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addModal">
+            <button type="button" class="btn btn-add rounded-circle" data-bs-toggle="modal" data-bs-target="#addModal">
                 <!-- icon add -->
-                <iconify-icon icon="icomoon-free:plus" class="icon-add" width="40"></iconify-icon>
+                <i class="fa-solid fa-plus" style="font-size: 50px; color: #fff;"></i>
             </button>
         </div>
     </main>
@@ -58,8 +67,8 @@
             <div class="modal-content ">
                 <!-- form input -->
                 <form class="form" id="form">
-                    <div class="modal-header bg-primary">
-                        <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Add New task</h1>
+                    <div class="modal-header" style="background-color: #01BAEF;">
+                        <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Tugas Baru</h1>
                         <button type="button" class="btn-close" id="closeAddModal" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -75,31 +84,31 @@
                         </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <input type="submit" value="Submit" name="Submit"
-                            class="btn btn-primary text-light fw-bold w-100">
+                    <div class="modal-footer ">
+                        <input type="submit" value="Submit" name="Simpan" class="btn text-light fw-bold w-100"
+                            style="background-color: #01BAEF;">
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <!-- Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade " id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog ">
             <div class="modal-content ">
                 <!-- form input -->
 
-                <div class="modal-header bg-primary">
-                    <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Add New task</h1>
+                <div class="modal-header" style="background-color: #01BAEF;">
+                    <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Konfirmasi</h1>
                     <button type="button" class="btn-close" id="closeAddModal" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
-
+                    <span>Apakah kamu yakin ingin menghapus data ini ?</span>
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" id="confirmDelete" value="Submit" name="Submit"
-                        class="btn btn-primary text-light fw-bold w-100">
+                    <input type="submit" id="confirmDelete" value="Hapus" class="btn text-light fw-bold w-100"
+                        style="background-color: #01BAEF;">
                 </div>
 
             </div>
@@ -117,7 +126,7 @@
     </script>
 
     <script>
-     
+
     </script>
 </body>
 

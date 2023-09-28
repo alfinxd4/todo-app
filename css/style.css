@@ -1,62 +1,40 @@
-.icon-notif {
-    color: #ffc107;
-    cursor: pointer;
-}
-.todo-list {
-    background-color: #0D6DFD;
-}
-
-#myDIV {
-    position: absolute;
-    width: 200px;
-    top : 75px;
-    right: 30px;
-    background-color: #ffc107;
-    padding: 5px;
-    cursor: pointer;
- }
- 
-.icon-check {
-    color: #ffc107;
-    cursor: pointer;
-}
-
-.icon-trash {
-    color: #dee2e6;
-    cursor: pointer;
-}
-.btn-add{
-    position: relative;
-    bottom: 25px;
-    background-color: #ffc107;
-}
-.btn-add:hover {
-    background-color: #ffc107; ;
-}
-.icon-add {
-    color: #0D6DFD;
-}
 body {
     background-color: #f5f5f5;
     margin: 0 1em;
   }
-
-  #field-search {
+main{
+    position: relative;
+}
+.stats-todo {
+    font-size: 1em;
+    fon-weight: 700;
+}
+.todo-list {
+    background-color: #01BAEF;
+}
+.btn-add{
+    position: relative;
+    bottom: 50px;
+    background-color: #ffc107;
+    margin-right: 1em;
+}
+.btn-add:hover {
+    background-color: #F9DC5C; 
+}
+.icon-add {
+    color: #0D6DFD;
+}
+#search-field {
     outline: none;
     width: calc(99% - 16px);
     position: absolute;
     display: none;
-
-    padding: 10px 60px;
+    padding: 0px 50px;
     right: 16px;
-
-
     background: none;
     border: 1px solid rgba(0, 0, 0, .3);
-  }
-
-  #search-icon {
+}
+#search-icon {
     position: relative;
     cursor: pointer;
-
-  }
+}

@@ -1,4 +1,5 @@
-// container list todo
+
+//   // container list todo
 const todo = [];
 // define custom event RENDER EVENT
 const RENDER_EVENT = 'render-task';
@@ -36,7 +37,7 @@ const generateTaskObject = (id,title,date,isCompleted) => {
 // save data after submit
 const saveData = () => {
     // check web storage
-    if (isStorageExist()) {
+    if (isStorageExist()) {         ``
      // changed data from obj.js to JSON String
     const parsed = JSON.stringify(todo);
     // set local storage to save data
@@ -48,7 +49,8 @@ const saveData = () => {
 //  add data task
 const addTask= () => {
     // get data from input value
-    const titleTask = document.getElementById('title').value;
+    const titleTask =  document.getElementById('title').value;
+ 
     const dateTask =  document.getElementById('date').value;
     // get unique id    
     const generateId = createId();
@@ -73,7 +75,7 @@ const makeTask= (taskObject) => {
     dateTask.innerText = taskObject.date;
     // create task container
     const taskContainer = document.createElement('div');
-    taskContainer.classList.add('col-10', 'col-lg-11');
+    taskContainer.classList.add('col-10', 'col-lg-11', 'py-2');
     // add element
     taskContainer.appendChild(titleTask);
     taskContainer.appendChild(dateTask);
@@ -89,21 +91,18 @@ const makeTask= (taskObject) => {
     // set id task
     container.setAttribute('id', `task-${taskObject.id}`);
     // create icon check
-    const checkButton = document.createElement('iconify-icon');
-    checkButton.classList.add('icon-check');
-    checkButton.setAttribute('icon', 'ic:outline-circle');
-    checkButton.setAttribute('width', 30);
+    const checkButton = document.createElement('i');
+    checkButton.classList.add('fa-regular', 'fa-circle');
+    checkButton.setAttribute('style', 'color:#F9DC5C;cursor:pointer;font-size:1.5em');
     // create icon trash
-    const trashButton = document.createElement('iconify-icon');
-    trashButton.classList.add('icon-trash');
-    trashButton.setAttribute('icon', 'mdi:trash');
-    trashButton.setAttribute('width', 30);
+    const trashButton = document.createElement('i');
+    trashButton.classList.add('fa-solid', 'fa-trash');
+    trashButton.setAttribute('style',  'color:#F9DC5C;cursor:pointer;font-size:1.5em');
     trashButton.setAttribute('data-bs-toggle', 'modal');
     trashButton.setAttribute('data-bs-target', '#deleteModal');
- 
     // create icon column check 
     const columnCheck = document.createElement('div');
-    columnCheck.classList.add('text-end');
+    columnCheck.classList.add('text-end','py-2');
     columnCheck.append(checkButton);
     // create icon column check 
     const columnTrash = document.createElement('div');
@@ -114,31 +113,22 @@ const makeTask= (taskObject) => {
     iconContainer.appendChild(columnTrash);
     //  check task has been completed
     if (taskObject.isCompleted) {
-
-      container.setAttribute('style','background-color:#198754')
+      container.setAttribute('style','background-color:#20BF55')
       container.classList.add('opacity-75');
       titleTask.classList.add('text-decoration-line-through', 'fst-italic');
       dateTask.classList.add('text-decoration-line-through', 'fst-italic');
-      checkButton.removeAttribute('icon', 'ic:outline-circle');
-      checkButton.setAttribute('icon', 'gg:check-o');
+      checkButton.classList.remove('fa-regular','fa-circle');
+      checkButton.classList.add('fa-solid','fa-circle-check')
       // event listener
       checkButton.addEventListener('click',function () {
         undoTaskFromCompleted(taskObject.id);
     });
-
-
     trashButton.addEventListener('click',function () {
-
-
       const confirmDelete =  document.getElementById('confirmDelete');
       confirmDelete.addEventListener('click',function ( ) { 
-    
           removeTaskFromList(taskObject.id);
-      
         })
         });
-
-
     }
     //  check task status notcompleted
     else {
@@ -146,24 +136,12 @@ const makeTask= (taskObject) => {
     checkButton.addEventListener('click',function () {
       addTaskFromCompleted(taskObject.id);
   });
-
    trashButton.addEventListener('click',function () {
-
-
     const confirmDelete =  document.getElementById('confirmDelete');
     confirmDelete.addEventListener('click',function ( ) { 
-  
         removeTaskFromList(taskObject.id);
-    
       })
-      });
-
-
-    
-
-
- 
-
+      })
 }
     // load all element above 
     return container;
@@ -186,76 +164,55 @@ const findTaskIndex = (taskId) => {
   }
   return -1;
 }
-
-
-// search task by filter data
-$(".bi").click(function () {
-  $(".bi").toggleClass("bi-search bi-arrow-left");
+// search task 
+// get class 'bi-search' from icon-search
+// event listener 'click'
+$("#search-icon").click(function () {
+  // get class 'bi' from icon-search
+  // toogle btn for change icon after click
+  $("#search-icon").toggleClass("fa-magnifying-glass fa-arrow-left");
+  // get id 'toogler' from toogle-btn
   $("#toggler").toggle();
+  // get id 'logo' from logo-todo
   $("#logo").toggle();
-  $("#field-search").toggle();
-});
-
-const searchTask = document.getElementById('field-search');
-searchTask.addEventListener('keyup',function () { 
-const inputSearch = document.getElementById("field-search");
-const filter = inputSearch.value.toUpperCase();
-
-  const data = document.getElementById("task"); //task
-  const dataList = data.getElementsByClassName('todo-list');  //
-
-  for (let i = 0; i < dataList.length; i++) {
-      const task = dataList[i].getElementsByClassName("title-task")[0];
-      if (task) {
-          txtValue = task.textContent || task.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            dataList[i].style.display = "";
-          } else {
-            dataList[i].style.display = "none";
-          }
-      }
+  // get id 'search-field' from input search-bar
+  $("#search-field").toggle();
+  // get id 'search-icon from icon-search
+  // check class for conditional
+  if ( $("#search-icon").hasClass("fa-arrow-left")) {
+    // event listener click
+    $(".fa-arrow-left").click(function () {
+      // reset input field
+      // $("#search-field").val('');
+      // reload page
+      location.reload()
+    })
   }
-
-  
- });
-
- const searchIcon = document.getElementById('search-icon');
-searchIcon.classList.contains('bi-arrow-left');
-
- if (searchIcon) {
-  searchIcon.addEventListener('click',function (ev) { 
-   const data = searchTask.value = "";
-   
-  
-    });
-    
- }
-
-//  const btnSearch = document.getElementById('search');
-
-//  btnSearch.addEventListener('click',function () { 
-
-//   const x = document.getElementById("myDIV");
-//   if (x.style.display === "none") {
-//     x.style.display = "block";
-//   } else {
-//     x.style.display = "none";
-//   }
-//  })
+});
+// event listener keyup
+// get id 'search-field' from input field
+$("#search-field").on("keyup", function() {
+// get input value and change it to lowercase
+const inputValue = $(this).val().toLowerCase();
+// get id 'task' n class 'todo-list' from container n list task
+// filter data for search
+$("#task .todo-list").filter(function() {
+  // get input value and check index data available
+  $(this).toggle($(this).text().toLowerCase().indexOf(inputValue) > -1)
+});
+});
 // add task from task list to completed list
 const addTaskFromCompleted = (taskId) => {
   const taskTarget = findTask(taskId);
   if(taskTarget === null) return;
-  
   taskTarget.isCompleted = true;
   saveData();
   document.dispatchEvent(new Event(RENDER_EVENT))
 }
-// 
+// undo task from list completed
 const undoTaskFromCompleted = (taskId) => {
   const taskTarget = findTask(taskId);
   if (taskTarget == null) return;
-  
   taskTarget.isCompleted = false;
   saveData();
   document.dispatchEvent(new Event(RENDER_EVENT));
@@ -268,10 +225,8 @@ const removeTaskFromList = (taskId) => {
     location.reload();
     saveData();
       // automatic click close button modal
-
     document.dispatchEvent(new Event(RENDER_EVENT));
   }
-
 // 
 // load data from local storage
 const loadDataFromStorage = () => {
@@ -314,7 +269,6 @@ document.addEventListener(SAVED_EVENT, function () {
 document.addEventListener('DOMContentLoaded',function () {
     // get element form
     const submitForm = document.getElementById('form');
-
     // event add 
     submitForm.addEventListener('submit',function (ev) {
         // cancel refresh web
@@ -323,14 +277,11 @@ document.addEventListener('DOMContentLoaded',function () {
         location.reload();
         // get method add task
         addTask();
-    });
-    
+    });   
     // check web storage
     if (isStorageExist()) {
     loadDataFromStorage();
     }
   });
-//  
-  
-
-
+// 
+// 
